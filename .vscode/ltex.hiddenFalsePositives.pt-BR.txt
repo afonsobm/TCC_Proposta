@@ -1,0 +1,4 @@
+{"rule":"FINAL_STOPS","sentence":"^\\QAluno: Bruno Machado Afonso\\E$"}
+{"rule":"FINAL_STOPS","sentence":"^\\QBruno Machado Afonso - Aluno\\E$"}
+{"rule":"FINAL_STOPS","sentence":"^\\QMariane Rembold Petraglia - Orientador\\E$"}
+{"rule":"GENERAL_GENDER_AGREEMENT_ERRORS","sentence":"^\\QAlém disso, este trabalho foca também no uso da RIR para gerar amostras de voz em ambientes simulados.\\E$"}
