@@ -2,3 +2,4 @@
 {"rule":"FINAL_STOPS","sentence":"^\\QBruno Machado Afonso - Aluno\\E$"}
 {"rule":"FINAL_STOPS","sentence":"^\\QMariane Rembold Petraglia - Orientador\\E$"}
 {"rule":"GENERAL_GENDER_AGREEMENT_ERRORS","sentence":"^\\QAlém disso, este trabalho foca também no uso da RIR para gerar amostras de voz em ambientes simulados.\\E$"}
+{"rule":"GRATUITY","sentence":"^\\QSoftware: MATLAB R2018a (Software não-gratuito, requer licença para uso) ITA-Toolbox, plugin open source para medições acústicas para MATLAB\\E$"}

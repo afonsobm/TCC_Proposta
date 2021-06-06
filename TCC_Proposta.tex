@@ -65,25 +65,89 @@ de equipamento especializado e diversos locais com características de modelo so
 \vspace{0.4cm}
 \textbf{67. OBJETIVO}
 
-O objetivo geral kkkkk, entkkkkko, propor um modelo computacional capaz de sistematizar o processo de ativakkkkkkkkkko cerebral humano para um conjunto limitado de estkkkkkmulos. Desta forma, tem-se como objetivos especkkkkkficos: (1) relacionar um conjunto de estkkkkkmulos morais e emocionais que serkkkkko tratados pelo modelo computacional; (2) construir um modelo tridimensional do ckkkkkrebro humano que possibilite a representakkkkkkkkkko espacial das kkkkkreas fisiolkkkkkgicas referentes ao estudo proposto, e; (3) elaborar um sistema formal capaz de deduzir uma determinada seqkkkkkkkkkkncia de entrada. Este sistema formal serkkkkk um sistema reconhecedor.
+O objetivo deste trabalho é desenvolver um algoritmo capaz de gerar amostras de RIR simuladas para diferentes ambientes a partir de uma RIR real e
+gerar um banco de dados de amostras de voz convoluídas com as RIR simuladas e com ruídos para uso em treinamento de redes neurais.
+Dessa forma, tem-se como objetivos específicos:
+
+\begin{enumerate}
+      \item Propor um algoritmo que altere as características da RIR para simular diferentes ambientes com RIR diferentes.
+      \item Elaborar um algoritmo que faça o acréscimo de ruídos pontuais ou ruídos de fundo em uma amostra de voz.
+      \item Desenvolver um sistema computacional que aplique ambos os algoritmos anteriores em sequência para gerar
+      amostras de voz em Ambientes ruidosos.
+\end{enumerate}
 
 \vspace{0.4cm}
 \textbf{7. METODOLOGIA}
 
-Este trabalho irkkkkk utilizar a correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais para a modelagem de um processo de tomada de deciskkkkko. A partir do uso da resposta BOLD (Blood Oxigen Level Derived) em imagens de ressonkkkkkncia funcional, se pretende estabelecer um modelo computacional que represente aspectos do comportamento deciskkkkkrio humano, para fins de identificakkkkkkkkkko. 
+Um sinal de voz gravado em um ambiente pode ser interpretado como a junção de três
+partes; uma amostra de voz pura, sem nenhum fator externo ou reverberação envolvido,
+convoluída com a Resposta ao Impulso da sala (RIR) onde ocorre a gravação, somada à
+um sinal de rúido, podendo este ser pontual ou um ruído de ambiente.
+A RIR representa um modelo acústico do ambiente, que define como um receptor acústico
+irá receber caso o áudio seja gerado e percebido de dentro deste ambiente.
+Uma definição de Resposta ao Impulso é a de uma função que registra a pressão sonora 
+ao longo do tempo em um ambiente fechado após uma excitação extremamente curta e 
+cheia de energia (dirac).
+
+Nessa tese é proposto uma forma de gerar RIR simuladas partindo de uma RIR real, ou seja,
+gravando um áudio que representa um impulso em um ambiente fechado real, e alterando
+suas propriedades. Seguimos o que foi proposto no artigo de data augmentation
+para respostas ao impulso para estimação do modelo acústico \cite{RIR_Data_Aug}, onde
+geramos RIR simuladas modificando as propriedades de Tempo de Decaimento (T60) e de
+razão entre áudio direto e reverberado (DRR). Através dessas duas propriedades, conseguimos
+definir praticamente todos os RIR possíveis de serem gravados de forma artificial.
+
+Para gerar as amostras de vozes reverberadas que compõe a base de dados, seguimos o
+que é proposto no artigo de estudo de data augmentation em vozes reverberadas
+\cite{Speech_Rec}, onde convoluímos sinais de voz puros com os RIR simulados que 
+foram gerados anteriormente. Além disso, é acrescentado a essa sinal de voz reverberado
+rúidos diversos, que são caracterizados de duas formas: ruídos pontuais e ruídos de ambiente.
+Os ruídos pontuais são amostras de aúdio curta que podem ser introduzidos em qualquer momento
+da fala, já os ruídos de ambiente são sons constantes ao fundo da gravação para simular
+um ambiente externo. Os ruídos foram extraídos da biblioteca MUSAN \cite{noiseLib}.
+
+Através desses dois passos, conseguimos gerar vários sinais de vozes reverberados artificialmente.
+A simulação do RIR tem por objetivo colocar a amostra de voz em vários ambientes fechados,
+e já os ruídos ajudam drasticamente no treinamento de redes neurais impedindo que
+as redes fiquem viciadas em características muito específicas da fala durante o treinamento, 
+pois eles tendem a simular os fatores externos que podem estar envolvidos em uma
+gravação real.
+
+% Este trabalho irkkkkk utilizar a correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais para a modelagem de um processo de tomada de deciskkkkko. A partir do uso da resposta BOLD (Blood Oxigen Level Derived) em imagens de ressonkkkkkncia funcional, se pretende estabelecer um modelo computacional que represente aspectos do comportamento deciskkkkkrio humano, para fins de identificakkkkkkkkkko. 
   
-A correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais durante a tomada de deciskkkkko, pode ser evidenciada pela ankkkkklise da ativakkkkkkkkkko temporal em imagens mkkkkkdicas de Ressonkkkkkncia Magnkkkkktica funcional (RMf). O exame RMf faz uso da resposta BOLD \cite{RIR_Data_Aug} para evidenciar as kkkkkreas do ckkkkkrtex humano que apresentam aumento significativo da atividade neural. Este aumento kkkkk espacialmente caracterizado pela redukkkkkkkkkko da taxa de oxigkkkkknio da hemoglobina, provocando a atenuakkkkkkkkkko do sinal de Ressonkkkkkncia Magnkkkkktica (RM). 
+% A correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais durante a tomada de deciskkkkko, pode ser evidenciada pela ankkkkklise da ativakkkkkkkkkko temporal em imagens mkkkkkdicas de Ressonkkkkkncia Magnkkkkktica funcional (RMf). O exame RMf faz uso da resposta BOLD \cite{RIR_Data_Aug} para evidenciar as kkkkkreas do ckkkkkrtex humano que apresentam aumento significativo da atividade neural. Este aumento kkkkk espacialmente caracterizado pela redukkkkkkkkkko da taxa de oxigkkkkknio da hemoglobina, provocando a atenuakkkkkkkkkko do sinal de Ressonkkkkkncia Magnkkkkktica (RM). 
 
-Desta forma, atravkkkkks de ambientes interativos baseados nos aspectos estkkkkktico e dinkkkkkmico de jogos interativos, situakkkkkkkkkkes envolvendo tomadas de deciskkkkkes assistidas por computador, e ainda, com o apoio de equipamentos avankkkkkados de RM, deseja-se mensurar e analisar a ativakkkkkkkkkko cerebral de um indivkkkkkduo (jogador). Assim, durante esses jogos interativos, o ckkkkkrebro do indivkkkkkduo serkkkkk monitorado e sua ativakkkkkkkkkko avaliada a partir do uso de tkkkkkcnicas de processamento de imagens online. O procedimento proposto de ankkkkklise permitirkkkkk uma modelagem mais eficiente da dinkkkkkmica evolutiva das emokkkkkkkkkkes morais, otimizando a compreenskkkkko e o delineamento da fronteira de sentimentos dkkkkkbios.
+% Desta forma, atravkkkkks de ambientes interativos baseados nos aspectos estkkkkktico e dinkkkkkmico de jogos interativos, situakkkkkkkkkkes envolvendo tomadas de deciskkkkkes assistidas por computador, e ainda, com o apoio de equipamentos avankkkkkados de RM, deseja-se mensurar e analisar a ativakkkkkkkkkko cerebral de um indivkkkkkduo (jogador). Assim, durante esses jogos interativos, o ckkkkkrebro do indivkkkkkduo serkkkkk monitorado e sua ativakkkkkkkkkko avaliada a partir do uso de tkkkkkcnicas de processamento de imagens online. O procedimento proposto de ankkkkklise permitirkkkkk uma modelagem mais eficiente da dinkkkkkmica evolutiva das emokkkkkkkkkkes morais, otimizando a compreenskkkkko e o delineamento da fronteira de sentimentos dkkkkkbios.
 
-As recentes evidkkkkkncias experimentais indicam que o comportamento skkkkkcio-moral do homem kkkkk baseado em circuitos cerebrais especkkkkkficos, porkkkkkm o mapeamento destes circuitos ainda encontra-se indefinido. A partir do processamento de imagens de RMf resultantes de estkkkkkmulos cooperativos inseridos em jogos, pretende-se evidenciar o relacionamento entre as porkkkkkkkkkkes especkkkkkficas do ckkkkkrebro humano responskkkkkveis pela gkkkkknese dos sentimentos morais e emocionais, a partir de akkkkkkkkkkes cooperativas e nkkkkko-cooperativas durante a dinkkkkkmica dos jogos \cite{Binmore92}.  
+% As recentes evidkkkkkncias experimentais indicam que o comportamento skkkkkcio-moral do homem kkkkk baseado em circuitos cerebrais especkkkkkficos, porkkkkkm o mapeamento destes circuitos ainda encontra-se indefinido. A partir do processamento de imagens de RMf resultantes de estkkkkkmulos cooperativos inseridos em jogos, pretende-se evidenciar o relacionamento entre as porkkkkkkkkkkes especkkkkkficas do ckkkkkrebro humano responskkkkkveis pela gkkkkknese dos sentimentos morais e emocionais, a partir de akkkkkkkkkkes cooperativas e nkkkkko-cooperativas durante a dinkkkkkmica dos jogos \cite{Binmore92}.  
 
-O kkkkkxito deste trabalho estkkkkk centrado na determinakkkkkkkkkko de uma metodologia para a construkkkkkkkkkko de um modelo computacional do ckkkkkrebro humano relacionado com sentimentos morais e emocionais, segundo algumas hipkkkkkteses previamente definidas. Tkkkkkcnicas de Computakkkkkkkkkko Grkkkkkfica e Processamento de Imagens skkkkko empregadas na construkkkkkkkkkko do modelo computacional \cite{Lins98} do processo de ativakkkkkkkkkko cerebral proposto. As imagens de RMf, que sofrem o processamento, serkkkkko obtidas em bancos de imagens de domkkkkknio pkkkkkblico.
+% O kkkkkxito deste trabalho estkkkkk centrado na determinakkkkkkkkkko de uma metodologia para a construkkkkkkkkkko de um modelo computacional do ckkkkkrebro humano relacionado com sentimentos morais e emocionais, segundo algumas hipkkkkkteses previamente definidas. Tkkkkkcnicas de Computakkkkkkkkkko Grkkkkkfica e Processamento de Imagens skkkkko empregadas na construkkkkkkkkkko do modelo computacional \cite{Lins98} do processo de ativakkkkkkkkkko cerebral proposto. As imagens de RMf, que sofrem o processamento, serkkkkko obtidas em bancos de imagens de domkkkkknio pkkkkkblico.
 
 \vspace{0.4cm}
 \textbf{8. MATERIAIS}
-	
-Relacionar os materiais que estkkkkko previstos no projeto (\textit{computadores, instrumentos, equipamentos, dados, software: explicitar se hkkkkk licenkkkkka})
+
+\begin{itemize}
+      \item Computador:
+      \begin{itemize}
+            \item CPU: Arquitetura amd86, AMD Ryzen 3600X 3.8GHz
+            \item RAM: 16 GB RAM DDR4
+            \item HDD: 1 TB
+      \end{itemize}
+
+      \item Software:
+      \begin{itemize}
+            \item MATLAB\textregistered \space R2018a (Software não-gratuito, requer licença para uso)
+            \item ITA-Toolbox, plugin open source para medições acústicas para MATLAB\textregistered
+      \end{itemize}
+
+      \item Dados:
+      \begin{itemize}
+            \item The Aachen Impulse Response (AIR) Database \cite{AIR_Database}, base de dados com respostas ao impulso
+            gravadas de diferentes ambientes.
+            \item MUSAN: A Music, Speech, and Noise Corpus \cite{noiseLib}, base de dados com amostras de ruídos pontuais
+            e ruídos de fundo.
+      \end{itemize}
+\end{itemize}
 
 \begin{figure}
       \begin{center}
