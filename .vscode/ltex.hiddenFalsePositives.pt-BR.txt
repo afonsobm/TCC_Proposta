@@ -6,3 +6,4 @@
 {"rule":"HUNSPELL_RULE","sentence":"^\\QApresentado graficamente conforme a Figura \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
 {"rule":"HUNSPELL_RULE","sentence":"^\\QFase 2: Desenvolvimento e implementação do algoritmo proposto \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q de reforço de dados para as RIR.\\E$"}
 {"rule":"HUNSPELL_RULE","sentence":"^\\QFase 3: Desenvolvimento e implementação do algoritmo proposto \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q de incremento de ruídos pontuais e de fundo em amostras de voz.\\E$"}
+{"rule":"HUNSPELL_RULE","sentence":"^\\QSeguimos o que foi proposto no artigo de data augmentation para respostas ao impulso para estimação do modelo acústico \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, onde geramos RIR simuladas modificando as propriedades de Tempo de Decaimento (T60) e de razão entre áudio direto e reverberado (DRR).\\E$"}
