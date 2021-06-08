@@ -2,3 +2,5 @@ Rembold
 Petraglia
 Augmentation
 convoluídas
+convoluída
+dirac

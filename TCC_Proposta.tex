@@ -63,11 +63,11 @@ desafios nessa área é de capturar essa extensa quantidade de gravações de á
 de equipamento especializado e diversos locais com características de modelo sonoro diferentes e pessoas diversas para amostras de voz.
 
 \vspace{0.4cm}
-\textbf{67. OBJETIVO}
+\textbf{6. OBJETIVO}
 
 O objetivo deste trabalho é desenvolver um algoritmo capaz de gerar amostras de RIR simuladas para diferentes ambientes a partir de uma RIR real e
 gerar um banco de dados de amostras de voz convoluídas com as RIR simuladas e com ruídos para uso em treinamento de redes neurais.
-Dessa forma, tem-se como objetivos específicos:
+Dessa forma, têm-se como objetivos específicos:
 
 \begin{enumerate}
       \item Propor um algoritmo que altere as características da RIR para simular diferentes ambientes com RIR diferentes.
@@ -79,49 +79,28 @@ Dessa forma, tem-se como objetivos específicos:
 \vspace{0.4cm}
 \textbf{7. METODOLOGIA}
 
-Um sinal de voz gravado em um ambiente pode ser interpretado como a junção de três
-partes; uma amostra de voz pura, sem nenhum fator externo ou reverberação envolvido,
-convoluída com a Resposta ao Impulso da sala (RIR) onde ocorre a gravação, somada à
-um sinal de rúido, podendo este ser pontual ou um ruído de ambiente.
-A RIR representa um modelo acústico do ambiente, que define como um receptor acústico
-irá receber caso o áudio seja gerado e percebido de dentro deste ambiente.
-Uma definição de Resposta ao Impulso é a de uma função que registra a pressão sonora 
-ao longo do tempo em um ambiente fechado após uma excitação extremamente curta e 
-cheia de energia (dirac).
+Um sinal de voz gravado em um ambiente pode ser interpretado como a junção de três partes; uma amostra de voz pura, sem nenhum fator externo
+ou reverberação envolvido, convoluída com a Resposta ao Impulso da sala (RIR) onde ocorre a gravação, somada a um sinal de ruído, podendo este 
+ser pontual ou um ruído de ambiente. A RIR representa um modelo acústico do ambiente, que define como um receptor acústico irá receber caso o áudio
+seja gerado e percebido de dentro deste ambiente. Uma definição de Resposta ao Impulso é a de uma função que registra a pressão sonora temporalmente
+em um ambiente fechado após uma excitação extremamente curta e cheia de energia (dirac).
 
-Nessa tese é proposto uma forma de gerar RIR simuladas partindo de uma RIR real, ou seja,
-gravando um áudio que representa um impulso em um ambiente fechado real, e alterando
-suas propriedades. Seguimos o que foi proposto no artigo de data augmentation
-para respostas ao impulso para estimação do modelo acústico \cite{RIR_Data_Aug}, onde
-geramos RIR simuladas modificando as propriedades de Tempo de Decaimento (T60) e de
-razão entre áudio direto e reverberado (DRR). Através dessas duas propriedades, conseguimos
-definir praticamente todos os RIR possíveis de serem gravados de forma artificial.
+Nessa tese é proposto uma forma de gerar RIR simuladas partindo de uma RIR real, ou seja, gravando um áudio que representa um impulso em um ambiente
+fechado real, e alterando suas propriedades. Seguimos o que foi proposto no artigo de data augmentation para respostas ao impulso para
+estimação do modelo acústico \cite{RIR_Data_Aug}, onde geramos RIR simuladas modificando as propriedades de Tempo de Decaimento (T60) e de
+razão entre áudio direto e reverberado (DRR). Através dessas duas propriedades, conseguimos definir praticamente todos os RIR possíveis de serem gravados
+de forma artificial.
 
-Para gerar as amostras de vozes reverberadas que compõe a base de dados, seguimos o
-que é proposto no artigo de estudo de data augmentation em vozes reverberadas
-\cite{Speech_Rec}, onde convoluímos sinais de voz puros com os RIR simulados que 
-foram gerados anteriormente. Além disso, é acrescentado a essa sinal de voz reverberado
-rúidos diversos, que são caracterizados de duas formas: ruídos pontuais e ruídos de ambiente.
-Os ruídos pontuais são amostras de aúdio curta que podem ser introduzidos em qualquer momento
-da fala, já os ruídos de ambiente são sons constantes ao fundo da gravação para simular
-um ambiente externo. Os ruídos foram extraídos da biblioteca MUSAN \cite{noiseLib}.
+Para gerar as amostras de vozes reverberadas que compõe a base de dados, seguimos o que é proposto no artigo de estudo de data
+augmentation em vozes reverberadas \cite{Speech_Rec}, onde convoluímos sinais de voz puros com os RIR simulados que foram gerados anteriormente.
+Além disso, é acrescentado a essa sinal de voz reverberado rúidos diversos, que são caracterizados de duas formas: ruídos pontuais e ruídos de ambiente.
+Os ruídos pontuais são amostras de aúdio curta que podem ser introduzidos em qualquer momento da fala, já os ruídos de ambiente são sons constantes
+ao fundo da gravação para simular um ambiente externo. Os ruídos foram extraídos da biblioteca MUSAN \cite{noiseLib}.
 
-Através desses dois passos, conseguimos gerar vários sinais de vozes reverberados artificialmente.
-A simulação do RIR tem por objetivo colocar a amostra de voz em vários ambientes fechados,
-e já os ruídos ajudam drasticamente no treinamento de redes neurais impedindo que
-as redes fiquem viciadas em características muito específicas da fala durante o treinamento, 
-pois eles tendem a simular os fatores externos que podem estar envolvidos em uma
+Através desses dois passos, conseguimos gerar vários sinais de vozes reverberados artificialmente. A simulação do RIR tem por objetivo colocar
+a amostra de voz em vários ambientes fechados, e já os ruídos ajudam drasticamente no treinamento de redes neurais impedindo que as redes fiquem
+viciadas em características muito específicas da fala durante o treinamento, pois eles tendem a simular os fatores externos que podem estar envolvidos em uma
 gravação real.
-
-% Este trabalho irkkkkk utilizar a correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais para a modelagem de um processo de tomada de deciskkkkko. A partir do uso da resposta BOLD (Blood Oxigen Level Derived) em imagens de ressonkkkkkncia funcional, se pretende estabelecer um modelo computacional que represente aspectos do comportamento deciskkkkkrio humano, para fins de identificakkkkkkkkkko. 
-  
-% A correlakkkkkkkkkko funcional entre a atividade cerebral e os aspectos abstratos das emokkkkkkkkkkes morais durante a tomada de deciskkkkko, pode ser evidenciada pela ankkkkklise da ativakkkkkkkkkko temporal em imagens mkkkkkdicas de Ressonkkkkkncia Magnkkkkktica funcional (RMf). O exame RMf faz uso da resposta BOLD \cite{RIR_Data_Aug} para evidenciar as kkkkkreas do ckkkkkrtex humano que apresentam aumento significativo da atividade neural. Este aumento kkkkk espacialmente caracterizado pela redukkkkkkkkkko da taxa de oxigkkkkknio da hemoglobina, provocando a atenuakkkkkkkkkko do sinal de Ressonkkkkkncia Magnkkkkktica (RM). 
-
-% Desta forma, atravkkkkks de ambientes interativos baseados nos aspectos estkkkkktico e dinkkkkkmico de jogos interativos, situakkkkkkkkkkes envolvendo tomadas de deciskkkkkes assistidas por computador, e ainda, com o apoio de equipamentos avankkkkkados de RM, deseja-se mensurar e analisar a ativakkkkkkkkkko cerebral de um indivkkkkkduo (jogador). Assim, durante esses jogos interativos, o ckkkkkrebro do indivkkkkkduo serkkkkk monitorado e sua ativakkkkkkkkkko avaliada a partir do uso de tkkkkkcnicas de processamento de imagens online. O procedimento proposto de ankkkkklise permitirkkkkk uma modelagem mais eficiente da dinkkkkkmica evolutiva das emokkkkkkkkkkes morais, otimizando a compreenskkkkko e o delineamento da fronteira de sentimentos dkkkkkbios.
-
-% As recentes evidkkkkkncias experimentais indicam que o comportamento skkkkkcio-moral do homem kkkkk baseado em circuitos cerebrais especkkkkkficos, porkkkkkm o mapeamento destes circuitos ainda encontra-se indefinido. A partir do processamento de imagens de RMf resultantes de estkkkkkmulos cooperativos inseridos em jogos, pretende-se evidenciar o relacionamento entre as porkkkkkkkkkkes especkkkkkficas do ckkkkkrebro humano responskkkkkveis pela gkkkkknese dos sentimentos morais e emocionais, a partir de akkkkkkkkkkes cooperativas e nkkkkko-cooperativas durante a dinkkkkkmica dos jogos \cite{Binmore92}.  
-
-% O kkkkkxito deste trabalho estkkkkk centrado na determinakkkkkkkkkko de uma metodologia para a construkkkkkkkkkko de um modelo computacional do ckkkkkrebro humano relacionado com sentimentos morais e emocionais, segundo algumas hipkkkkkteses previamente definidas. Tkkkkkcnicas de Computakkkkkkkkkko Grkkkkkfica e Processamento de Imagens skkkkko empregadas na construkkkkkkkkkko do modelo computacional \cite{Lins98} do processo de ativakkkkkkkkkko cerebral proposto. As imagens de RMf, que sofrem o processamento, serkkkkko obtidas em bancos de imagens de domkkkkknio pkkkkkblico.
 
 \vspace{0.4cm}
 \textbf{8. MATERIAIS}
@@ -149,35 +128,30 @@ gravação real.
       \end{itemize}
 \end{itemize}
 
-\begin{figure}
+\pagebreak
+
+\begin{figure}[htp]      
       \begin{center}
-      \parbox[h]{14cm}
-        {
-        \begin{center}
-        \includegraphics[scale=1.0]{Cronograma.eps}
-        \caption[\small{(\textit{Atenkkkkkkkkkko, evitar projetos com menos de 5 meses})}]{\label{Fig:Cronograma} \footnotesize{(\textit{Atenkkkkkkkkkko, evitar projetos com menos de 5 meses})}}
-        \end{center}
-        }
+      \makebox[\textwidth]{\includegraphics[width=1.35\textwidth]{cronograma-bruno.png}}
+      \caption{\footnotesize{Cronograma do projeto}}
+      \label{Fig:Cronograma}
       \end{center}
 \end{figure} 
 
 \vspace{0.4cm}
 \textbf{9. CRONOGRAMA}
 
-Apresentada graficamente conforme a Figura \ref{Fig:Cronograma}.
+Apresentado graficamente conforme a Figura \ref{Fig:Cronograma}.
 
-Fase 1: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
+Fase 1: Estudo sobre a Resposta ao Impulso sonoro e sobre os seus principais parâmetros.
 
-Fase 2: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
+Fase 2: Desenvolvimento e implementação do algoritmo proposto \cite{RIR_Data_Aug} de reforço de dados para as RIR.
 
-Fase 3: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
+Fase 3: Desenvolvimento e implementação do algoritmo proposto \cite{Speech_Rec} de incremento de ruídos pontuais e de fundo em amostras de voz.
 
-Fase 4: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
+Fase 4: Desenvolvimento e implementação do algoritmo que cria sinais de voz com RIR e ruídos gerados nas etapas anteriores.
 
-Fase 5: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
-
-Fase 6: Descrikkkkkkkkkko sucinta do que serkkkkk feito.
-
+Fase 5: Escrita do texto do projeto de graduação.
 
 
 \bibliography{TCC_Proposta_bib} 

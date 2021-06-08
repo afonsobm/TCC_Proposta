@@ -3,3 +3,6 @@
 {"rule":"FINAL_STOPS","sentence":"^\\QMariane Rembold Petraglia - Orientador\\E$"}
 {"rule":"GENERAL_GENDER_AGREEMENT_ERRORS","sentence":"^\\QAlém disso, este trabalho foca também no uso da RIR para gerar amostras de voz em ambientes simulados.\\E$"}
 {"rule":"GRATUITY","sentence":"^\\QSoftware: MATLAB R2018a (Software não-gratuito, requer licença para uso) ITA-Toolbox, plugin open source para medições acústicas para MATLAB\\E$"}
+{"rule":"HUNSPELL_RULE","sentence":"^\\QApresentado graficamente conforme a Figura \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"HUNSPELL_RULE","sentence":"^\\QFase 2: Desenvolvimento e implementação do algoritmo proposto \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q de reforço de dados para as RIR.\\E$"}
+{"rule":"HUNSPELL_RULE","sentence":"^\\QFase 3: Desenvolvimento e implementação do algoritmo proposto \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q de incremento de ruídos pontuais e de fundo em amostras de voz.\\E$"}
